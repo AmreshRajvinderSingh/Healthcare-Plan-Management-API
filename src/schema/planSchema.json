@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": ["planCostShares", "linkedPlanServices", "objectId", "objectType", "planType", "creationDate"],
+    "properties": {
+      "planCostShares": {
+        "type": "object",
+        "required": ["deductible", "_org", "copay", "objectId", "objectType"],
+        "properties": {
+          "deductible": { "type": "integer", "minimum": 0 },
+          "_org": { "type": "string" },
+          "copay": { "type": "integer", "minimum": 0 },
+          "objectId": { "type": "string" },
+          "objectType": { "type": "string", "enum": ["membercostshare"] }
+        }
+      },
+      "linkedPlanServices": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["linkedService", "planserviceCostShares", "_org", "objectId", "objectType"],
+          "properties": {
+            "linkedService": {
+              "type": "object",
+              "required": ["_org", "objectId", "objectType", "name"],
+              "properties": {
+                "_org": { "type": "string" },
+                "objectId": { "type": "string" },
+                "objectType": { "type": "string", "enum": ["service"] },
+                "name": { "type": "string" }
+              }
+            },
+            "planserviceCostShares": {
+              "type": "object",
+              "required": ["deductible", "_org", "copay", "objectId", "objectType"],
+              "properties": {
+                "deductible": { "type": "integer", "minimum": 0 },
+                "_org": { "type": "string" },
+                "copay": { "type": "integer", "minimum": 0 },
+                "objectId": { "type": "string" },
+                "objectType": { "type": "string", "enum": ["membercostshare"] }
+              }
+            },
+            "_org": { "type": "string" },
+            "objectId": { "type": "string" },
+            "objectType": { "type": "string", "enum": ["planservice"] }
+          }
+        }
+      },
+      "_org": { "type": "string" },
+      "objectId": { "type": "string" },
+      "objectType": { "type": "string", "enum": ["plan"] },
+      "planType": { "type": "string", "enum": ["inNetwork", "outNetwork"] },
+      "creationDate": {
+        "type": "string",
+        "pattern": "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])-(\\d{4})$"
+      }
+    }
+  }
+  
